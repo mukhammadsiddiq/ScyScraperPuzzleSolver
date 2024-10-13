@@ -6,7 +6,7 @@
 /*   By: mukibrok <mukibrok@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:26:26 by mukibrok          #+#    #+#             */
-/*   Updated: 2024/10/12 22:50:16 by mukibrok         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:18:50 by mukibrok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putchar(char c);
 void	ft_putstr(char s);
-int		is_valid(int **grid, int row, int  col, int num, int *clues);
+int		is_valid(int **grid, int row, int col, int num);
 
 int	**create_grid(void)
 {
@@ -49,7 +49,7 @@ int	solve(int **grid, int row, int col, int *clues)
 	num = 1;
 	while (num <= 4)
 	{
-		if (is_valid(grid, row, col, num, clues))
+		if (is_valid(grid, row, col, num))
 		{
 			grid[row][col] = num;
 			if (solve(grid, row, col + 1, clues))
@@ -59,90 +59,6 @@ int	solve(int **grid, int row, int col, int *clues)
 		num++;
 	}
 	return (0);
-}
-
-int	is_double(int **grid, int row, int col, int num)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (grid[row][i] == num || grid[i][col] == num)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_row_visibility(int **grid, int row, int expected_visibility)
-{
-	int	visibility;
-	int	max_height;
-	int	i;
-
-	visibility = 0;
-	max_height = 0;
-	i = 0;
-	while (i < 4)
-	{
-		if (grid[row][i] > max_height) 
-		{
-			max_height = grid[row][i];
-			visibility++;
-		}
-		i++;
-	}
-	return (visibility == expected_visibility);
-}
-
-int	check_col_visibility(int **grid, int col, int expected_visibility)
-{
-	int	visibility; 
-	int	max_height;
-	int	i;
-
-	i = 0;
-	visibility = 0;
-	max_height = 0;
-	while (i < 4)
-	{
-		if (grid[i][col] > max_height) 
-		{
-			max_height = grid[i][col];
-			visibility++;
-		}
-		i++;
-	}
-	return (visibility == expected_visibility);
-}
-
-int	is_valid(int **grid, int row, int  col, int num, int *clues)
-{
-	int	visibility;
-	int	height;
-	int	i;
-
-	if (!is_double(grid, row, col, num))
-		return (0);
-	grid[row][col] = num;
-	if (col == 3) 
-	{
-		if (!check_row_visibility(grid, row, clues[8 + row])) 
-		{
-			grid[row][col] = 0;
-			return (0);
-		}
-	}
-	if (row == 3) 
-	{
-		if (!check_col_visibility(grid, col, clues[col])) 
-		{
-			grid[row][col] = 0;
-			return (0);
-		}
-	}
-	return (1);
 }
 
 void	free_grid(int **grid)
@@ -162,7 +78,6 @@ void	print_grid(int **grid)
 {
 	int		i;
 	int		j;
-	char	c;
 
 	i = 0;
 	while (i < 4)

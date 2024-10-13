@@ -6,7 +6,7 @@
 /*   By: mukibrok <mukibrok@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:13:29 by mukibrok          #+#    #+#             */
-/*   Updated: 2024/10/12 22:37:14 by mukibrok         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:53:53 by mukibrok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,30 @@ int		*ft_atoi(char *s, int *arr);
 int		solve(int **grid, int row, int col, int *clues);
 void	free_grid(int **grid);
 void	print_grid(int **grid);
+int		*g_clues;
 
 int	rush(char *s)
 {
 	int	**grid;
-	int	*clues;
 
-	clues = malloc(sizeof(int) * 16);
-	if (!clues)
+	g_clues = malloc(sizeof(int) * 16);
+	if (!g_clues)
 		return (1);
 	grid = create_grid();
 	if (!grid)
 		return (1);
-	if (!ft_atoi(s, clues))
+	if (!ft_atoi(s, g_clues))
 	{
 		free_grid(grid);
 		return (1);
 	}
-	if (solve(grid, 0, 0, clues))
+	if (solve(grid, 0, 0, g_clues))
 		print_grid(grid);
 	else
 	{
 		ft_putstr("Error");
-		ft_putchar('\n');
 	}
-	free(clues);
+	free(g_clues);
 	free_grid(grid);
 	return (0);
 }
