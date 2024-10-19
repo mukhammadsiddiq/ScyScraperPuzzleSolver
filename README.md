@@ -24,3 +24,10 @@ The program should be executed with the following parameters:
 ```bash
 ./rush-01 "col1up col2up col3up col4up col1down col2down col3down col4down row1left row2left row3left row4left row1right row2right row3right row4right"
 ```
+## Example
+
+To run the program and view the solution, use the following command:
+
+```bash
+./rush-01 "4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2" | cat -e
+```
