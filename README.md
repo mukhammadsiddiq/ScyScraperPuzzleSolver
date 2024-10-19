@@ -31,3 +31,35 @@ To run the program and view the solution, use the following command:
 ```bash
 ./rush-01 "4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2" | cat -e
 ```
+### Expected Output
+
+The output will be:
+
+```bash
+1 2 3 4$
+2 3 4 1$
+3 4 1 2$
+4 1 2 3$
+```
+
+## Errors
+
+```bash
+Error$
+```
+If there is an error during execution, the program will return:
+
+
+## Project Structure
+
+- `*.c`: All source code files.
+- `Makefile`: (optional) to facilitate compilation.
+- `README.md`: This file.
+
+## Contribution
+
+Feel free to contribute improvements or fixes! You can submit pull requests or report issues in the project.
+
+## License
+
+This project is in the public domain and can be used and modified freely.
